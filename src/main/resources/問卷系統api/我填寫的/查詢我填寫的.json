@@ -1,0 +1,12 @@
+{
+  "writeStatus": "",
+  "questionType": "",
+  "status": "",
+  "cnName": "",
+  "hkName": "",
+  "enName": "",
+  "rowBound": {
+    "pageSize": 10,
+    "pageCurrent": 1
+  }
+}

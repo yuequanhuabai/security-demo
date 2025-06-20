@@ -1,0 +1,14 @@
+//  數據默認為string，如有其它數據類型會特別説明
+//status 為int
+{
+  "name": "",
+  "questionType": "",
+  "cnName": "",
+  "hkName": "",
+  "enName": "",
+  "status": 1,
+  "rowBound": {
+    "pageSize": 10,
+    "pageCurrent": 1
+  }
+}

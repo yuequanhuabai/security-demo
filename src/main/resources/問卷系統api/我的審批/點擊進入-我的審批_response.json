@@ -1,0 +1,22 @@
+[
+  {
+    "questionId": "",
+    "id": "",
+    "questionCode": "",
+    "userId": "",
+    "userName": "",
+    "content": [],
+    "extendInfo": {},
+    "totalScore": "",
+    "status": "",
+    "approverId": "",
+    "approveName": "",
+    "approveStatus": "",
+    "tag": "",
+    "createTime":"",
+    "updateBy": "",
+    "updateTime": "",
+    "deleteFlag": "",
+    "version": ""
+  }
+]

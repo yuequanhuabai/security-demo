@@ -1,0 +1,26 @@
+### Send POST request with json body
+# @no-redirect
+POST http://localhost:6666/test/query
+Content-Type: application/json
+
+{
+  "pageNo": 1,
+  "pageSize": 10
+}
+
+### 新增
+POST http://localhost:6666/test/insert
+Content-Type: application/json
+
+{
+"name": "content2"
+}
+
+### 修改
+POST http://localhost:6666/test/insert
+Content-Type: application/json
+
+{
+  "id": "7acef095-b048-11ef-905c-588a5a42d312",
+  "name": "modify"
+}
