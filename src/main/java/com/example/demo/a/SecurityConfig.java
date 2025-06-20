@@ -8,7 +8,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
-@EnableWebSecurity
 public class SecurityConfig {
 
 //    @Bean
@@ -29,11 +28,17 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(
-                auth -> {
-                    auth.requestMatchers("/questionnaire/**").permitAll()
-                            .anyRequest().authenticated();
-                }
-        ).formLogin(Customizer.withDefaults());
+                        auth -> {
+                            auth.requestMatchers("/questionnaire/**").permitAll()
+//                                    .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
+                                    .anyRequest().authenticated();
+                        }
+                ).formLogin(
+                        form -> form.defaultSuccessUrl("/swagger-ui/index.html", true)
+                )
+                .csrf(csrf -> csrf.disable()
+                );
+
         return http.build();
     }
 }

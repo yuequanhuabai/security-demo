@@ -4,8 +4,10 @@ import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.segments.MergeSegments;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.annotation.Resource;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,8 +28,8 @@ public class StudentController<T> {
 //    @Resource
 //    private ApplicationEventPublisher eventPublisher;
 
-
-    @RequestMapping("query")
+    @Operation(description = "查詢Student數據")
+    @PostMapping("query")
     public T getStudent(@RequestBody Map<String, Object> reqeustParam) {
         Integer pageNo = (Integer) reqeustParam.get("pageNo");
         Integer pageSize = (Integer) reqeustParam.get("pageSize");
@@ -36,15 +38,11 @@ public class StudentController<T> {
 
         LambdaQueryWrapper<Student> wrapper = new LambdaQueryWrapper<>();
 
-//        studentMapper.select
-
         Page<Student> studentPage = studentMapper.selectPage(page, wrapper);
         List<Student> records = studentPage.getRecords();
         Map<String, Object> data = new HashMap<>();
         data.put("records", records);
         data.put("total", studentPage.getTotal());
-
-
         return (T) data;
     }
 
