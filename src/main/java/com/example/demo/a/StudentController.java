@@ -7,16 +7,14 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.annotation.Resource;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 @RestController
 @RequestMapping("/test")
@@ -30,7 +28,7 @@ public class StudentController<T> {
 
     @Operation(description = "查詢Student數據")
     @PostMapping("query")
-    public T getStudent(@RequestBody Map<String, Object> reqeustParam) {
+    public ResponseEntity<Map<String,Object>> getStudent(@RequestBody Map<String, Object> reqeustParam) {
         Integer pageNo = (Integer) reqeustParam.get("pageNo");
         Integer pageSize = (Integer) reqeustParam.get("pageSize");
 
@@ -43,7 +41,9 @@ public class StudentController<T> {
         Map<String, Object> data = new HashMap<>();
         data.put("records", records);
         data.put("total", studentPage.getTotal());
-        return (T) data;
+        ResponseEntity.ok(data);
+       return ResponseEntity.of(Optional.of(data));
+
     }
 
 
