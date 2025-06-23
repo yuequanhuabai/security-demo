@@ -1,23 +1,21 @@
 package com.example.demo.a;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.segments.MergeSegments;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.annotation.Resource;
-import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.sql.SQLException;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 @RestController
-@RequestMapping("/test")
+@RequestMapping("/test/")
 public class StudentController<T> {
 
     @Resource
@@ -28,9 +26,9 @@ public class StudentController<T> {
 
     @Operation(description = "查詢Student數據")
     @PostMapping("query")
-    public ResponseEntity<Map<String,Object>> getStudent(@RequestBody Map<String, Object> reqeustParam) {
-        Integer pageNo = (Integer) reqeustParam.get("pageNo");
-        Integer pageSize = (Integer) reqeustParam.get("pageSize");
+    public Map<String,Object> getStudent(@RequestBody Map<String, Object> requestParam) {
+        Integer pageNo = (Integer) requestParam.get("pageNo");
+        Integer pageSize = (Integer) requestParam.get("pageSize");
 
         Page<Student> page = new Page<>(pageNo, pageSize);
 
@@ -38,11 +36,14 @@ public class StudentController<T> {
 
         Page<Student> studentPage = studentMapper.selectPage(page, wrapper);
         List<Student> records = studentPage.getRecords();
+        long total = studentPage.getTotal();
+
         Map<String, Object> data = new HashMap<>();
         data.put("records", records);
-        data.put("total", studentPage.getTotal());
-        ResponseEntity.ok(data);
-       return ResponseEntity.of(Optional.of(data));
+        data.put("total",total);
+
+        return  data;
+
 
     }
 

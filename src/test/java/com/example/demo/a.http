@@ -1,7 +1,10 @@
 ### Send POST request with json body
 # @no-redirect
-POST http://localhost:6666/test/query
+POST http://localhost:8080/test/query
+Authorization: Basic cm9vdDpyb290
+
 Content-Type: application/json
+
 
 {
   "pageNo": 1,

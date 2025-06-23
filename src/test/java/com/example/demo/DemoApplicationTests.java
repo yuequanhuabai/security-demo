@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Base64;
 
 @SpringBootTest
 class DemoApplicationTests {
@@ -52,6 +53,16 @@ class DemoApplicationTests {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
+    }
+
+    @Test
+    public void basicAuthGenerator(){
+        String username = "root";
+        String password = "root";
+        String auth=username + ":" + password;
+        String encoded = Base64.getEncoder().encodeToString(auth.getBytes());
+        System.out.println("encoded:"+encoded);
 
     }
 
